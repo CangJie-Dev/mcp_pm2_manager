@@ -1,0 +1,29 @@
+{
+  "name": "mcp-pm2-manager",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "description": "A PM2 manager project to run MCP servers (es_log_search, mysql_query).",
+  "scripts": {
+    "pm2:start": "pm2 start ecosystem.config.cjs",
+    "pm2:restart": "pm2 restart ecosystem.config.cjs",
+    "pm2:stop": "pm2 stop ecosystem.config.cjs",
+    "pm2:delete": "pm2 delete ecosystem.config.cjs",
+    "pm2:status": "pm2 status",
+    "pm2:logs": "pm2 logs",
+    "es:build": "npm --prefix ./es_log_search run build",
+    "es:start": "npm run es:build && pm2 start ecosystem.config.cjs --only mcp-es-log-search",
+    "es:restart": "pm2 restart mcp-es-log-search",
+    "es:stop": "pm2 stop mcp-es-log-search",
+    "es:logs": "pm2 logs mcp-es-log-search --lines 200",
+    "mysql:build": "npm --prefix ./mysql_query run build",
+    "mysql:start": "npm run mysql:build && pm2 start ecosystem.config.cjs --only mcp-mysql-query",
+    "mysql:restart": "pm2 restart mcp-mysql-query",
+    "mysql:stop": "pm2 stop mcp-mysql-query",
+    "mysql:logs": "pm2 logs mcp-mysql-query --lines 200"
+  },
+  "dependencies": {
+    "pm2": "^6.0.14"
+  }
+}
+
